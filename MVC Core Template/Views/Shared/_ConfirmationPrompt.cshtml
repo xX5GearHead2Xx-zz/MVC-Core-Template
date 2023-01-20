@@ -1,0 +1,39 @@
+﻿<div class="modal fade" id="ConfirmationPromptModal" tabindex="-1" aria-labelledby="ConfirmationPromptModal" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+            </div>
+            <div class="modal-body">
+                <p id="ConfirmationMessage"></p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-dark btn-sm w-100" id="ConfirmationNoButton">Cancel</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-primary btn-sm w-100" id="ConfirmationYesButton">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var ConfirmationModal = new bootstrap.Modal(document.getElementById("ConfirmationPromptModal"), {});
+
+    function dialog(message, yesCallback) {
+        $('#ConfirmationMessage').html(message);
+        ConfirmationModal.show();
+
+        $('#ConfirmationYesButton').click(function () {
+            ConfirmationModal.hide();
+            yesCallback();
+        });
+        $('#ConfirmationNoButton').click(function () {
+            ConfirmationModal.hide();
+        });
+    }
+</script>

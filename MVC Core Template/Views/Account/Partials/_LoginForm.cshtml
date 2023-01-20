@@ -1,0 +1,16 @@
+﻿@using (Html.BeginForm("Authenticate", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-floating mb-3">
+        <input class="form-control" type="email" id="LoginEmail" name="Email" placeholder="Email" required />
+        <label for="LoginEmail">Email</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" type="password" id="LoginPassword" name="Password" placeholder="Password" required />
+        <label for="LoginPassword">Password</label>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/_Recaptcha.cshtml")
+    <button type="submit" class="btn btn-primary w-100 mb-3">Log In</button>
+    <p class="text-center"><a class="text-light" href="@Url.Action("ForgotPassword", "Account")">Forgot Password</a></p>
+}
+

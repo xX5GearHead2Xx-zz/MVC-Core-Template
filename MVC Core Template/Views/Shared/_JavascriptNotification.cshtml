@@ -1,0 +1,51 @@
+﻿<div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div class="toast" role="alert" data-bs-delay="4000" data-bs-autohide="true" data-bs-animation="true" aria-live="assertive" aria-atomic="true" id="JavascriptNotification">
+            <div class="toast-header">
+                <div style="height:20px;width:20px" class="rounded me-2" id="NotificationType"></div>
+                <strong class="me-auto">
+                    <span id="NotificationTitle"></span>
+                </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <span id="NotificationBody"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function DisplayNotification(titleText, bodyText, type) {
+        try {
+            $("#NotificationTitle").html(titleText);
+            $("#NotificationBody").html(bodyText);
+            var NotificationType = document.getElementById("NotificationType");
+            NotificationType.classList.remove("bg-danger");
+            NotificationType.classList.remove("bg-success");
+            NotificationType.classList.remove("bg-info");
+            switch (type) {
+                case "Error":
+                    NotificationType.classList.add("bg-danger");
+                    break;
+                case "Success":
+                    NotificationType.classList.add("bg-success");
+                    break;
+                case "Info":
+                    NotificationType.classList.add("bg-info");
+                    break;
+                default:
+                    NotificationType.style.display("none");
+                    break;
+            }
+            var JavascriptNotification = document.getElementById('JavascriptNotification');
+            const toast = new bootstrap.Toast(JavascriptNotification);
+            toast.show();
+        } catch (err) {
+            console.log(err);
+        }
+
+    }
+</script>
+
+

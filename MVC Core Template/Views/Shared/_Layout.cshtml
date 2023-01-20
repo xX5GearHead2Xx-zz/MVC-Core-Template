@@ -1,0 +1,92 @@
+﻿@using System.Security.Claims;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Template</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-dark">
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-md py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="@Url.Action("Shop", "Shop")">
+                    <span>Template</span>
+                </a>
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div id="navcol-3" class="collapse navbar-collapse">
+                    <ul class="navbar-nav mx-auto">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-user"></i> Account
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="@Url.Action("Account","AccountManagement")">Account</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("LogOut","Account")">Log Out</a></li>
+                                </ul>
+                            </li>
+                            @if (User.Claims.Where(C => C.Type == ClaimTypes.Role).Count() > 0)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-table-columns"></i> Dashboard
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        @if (User.IsInRole(""))
+                                        {
+                                            <li><a class="dropdown-item" href="@Url.Action("","")">A role specific link</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link text-light" href="@Url.Action("Registration","Account")"><i class="fas fa-user-edit"></i> Register</a></li>
+                            <li class="nav-item"><a class="nav-link text-light" href="@Url.Action("Login","Account")"><i class="far fa-user-circle"></i> Sign In</a></li>
+                        }
+                        <li class="nav-item"><a class="nav-link text-light" href="@Url.Action("Contact","Account")"><i class="fas fa-envelope"></i> Contact Us</a></li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3 mt-5">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="text-center bg-dark">
+        <div class="container text-white py-4 py-lg-5">
+            <ul class="list-inline">
+                <li class="list-inline-item me-4"><a href="@Url.Action("Legal","Home", new {TextType = Ecommerce.Enums.LegalTextType.TermsAndConditions})">Terms and Conditions</a></li>
+                <li class="list-inline-item me-4"><a href="@Url.Action("Legal","Home", new {TextType = Ecommerce.Enums.LegalTextType.PrivacyPolicy})">Privacy</a></li>
+                <li class="list-inline-item me-4"><a href="@Url.Action("Legal","Home", new {TextType = Ecommerce.Enums.LegalTextType.Disclaimer})">Disclaimer</a></li>
+                <li class="list-inline-item me-4"><a href="@Url.Action("Legal","Home", new {TextType = Ecommerce.Enums.LegalTextType.CookiePolicy})">Cookies</a></li>
+                <li class="list-inline-item me-4"><a href="@Url.Action("Legal","Home", new {TextType = Ecommerce.Enums.LegalTextType.ReturnsPolicy})">Returns</a></li>
+            </ul>
+            <p class="text-muted mb-0">Copyright © 2022 Company Name</p>
+        </div>
+    </footer>
+  
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+@await Html.PartialAsync("~/Views/Shared/_ConfirmationPrompt.cshtml")
+@await Html.PartialAsync("~/Views/Legal/Partials/_CookiePrompt.cshtml")
+@await Html.PartialAsync("~/Views/Shared/_Notifications.cshtml")
+@await Html.PartialAsync("~/Views/Shared/_JavascriptNotification.cshtml")
+
+

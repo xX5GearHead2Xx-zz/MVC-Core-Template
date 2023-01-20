@@ -1,0 +1,26 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="block-heading">
+        <h1 class="text-light">Account Details</h1>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="Address-Tab" href="#">Details</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" role="tabpanel" id="Addresses" aria-labelledby="Addresses-Tab">
+                    Your email is @Model.Email
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

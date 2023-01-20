@@ -1,0 +1,21 @@
+﻿@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "RegisterForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-floating mb-3">
+        <input class="form-control" type="email" id="RegisterEmail" name="Email" placeholder="Email" required />
+        <label for="RegisterEmail">Email</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" onkeyup="ValidatePassword(this)" type="password" id="Password" name="Password" placeholder="Password" required />
+        <label for="RegisterPassword">Password</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input class="form-control" onkeyup="PasswordsMatch()" type="password" id="ConfirmPassword" name="ConfirmPassword" placeholder="Confirm Password" required />
+        <label for="ConfirmPassword">Confirm Password</label>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/_Recaptcha.cshtml")
+    <button type="button" onclick="SubmitForm('RegisterForm')" class="btn btn-primary w-100 mb-3">Register</button>
+    <p class="text-light text-center">By registering you agree to the <a class="text-light" href="@Url.Action("Legal","Shop", new {TextType = Ecommerce.Enums.LegalTextType.TermsAndConditions})">Terms and Conditions</a> and <a class="text-light" href="@Url.Action("Legal","Shop", new {TextType = Ecommerce.Enums.LegalTextType.PrivacyPolicy})">Privacy Statement</a> </p>
+}
+
+@await Html.PartialAsync("~/Views/Shared/_PasswordValidation.cshtml")

@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="position-relative py-4 py-xl-5">
+    <div class="container position-relative">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2 class="text-light">Contact us</h2>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6 col-lg-4 col-xl-4">
+                <div class="d-flex flex-column justify-content-center align-items-start h-100">
+                    <div class="d-flex align-items-center p-3 text-light">
+                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon">
+                            <h1><i class="fa-solid fa-square-phone"></i></h1>
+                        </div>
+                        <div class="px-2 text-light">
+                            <h6 class="mb-0">Phone</h6>
+                            <p class="mb-0">+123456789</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center p-3 text-light">
+                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon">
+                            <h1><i class="fa-solid fa-square-envelope"></i></h1>
+                        </div>
+                        <div class="px-2 text-light">
+                            <h6 class="mb-0">Email</h6>
+                            <p class="mb-0">info@example.com</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center p-3 text-light">
+                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon">
+                            <h1><i class="fa-solid fa-building"></i></h1>
+                        </div>
+                        <div class="px-2 text-light">
+                            <h6 class="mb-0 text-light">Location</h6>
+                            <p class="mb-0">12 Example Street</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-5 col-xl-4">
+                @using (Html.BeginForm("Contact", "Account", FormMethod.Post))
+                {
+                    <div class="form-floating mb-3">
+                        <input id="Name" class="form-control" type="text" name="name" placeholder="Name" required />
+                        <label for="Name">Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input id="Email" class="form-control" type="email" name="email" placeholder="Email" required />
+                        <label for="Email">Email</label>
+                    </div>
+                    <div class="mb-3">
+                        <textarea id="Message" class="form-control" name="message" rows="6" placeholder="Message" requried></textarea>
+                    </div>
+                    <div>
+                        @await Html.PartialAsync("~/Views/Shared/_Recaptcha.cshtml")
+                        <button class="btn btn-primary d-block w-100" type="submit">Send </button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>

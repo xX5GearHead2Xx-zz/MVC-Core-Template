@@ -1,0 +1,52 @@
+﻿@using Ecommerce.ViewModels
+@using Newtonsoft.Json
+@if (TempData["Notifications"] is not null)
+{
+    List<Notification> Notifications = JsonConvert.DeserializeObject<List<Notification>>(TempData["Notifications"].ToString());
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            @{
+                int Delay = 4000;
+            }
+            @foreach (Notification Notification in Notifications)
+            {
+                <div class="toast" role="alert" data-bs-delay="@Delay" data-bs-autohide="true" data-bs-animation="true" aria-live="assertive" aria-atomic="true" name="Notification">
+                    <div class="toast-header">
+                        @switch (Notification.NotificationType)
+                        {
+                            case Enums.NotificationType.Error:
+                                <div style="height:20px;width:20px" class="rounded me-2 bg-danger"></div>
+                                break;
+                            case Enums.NotificationType.Success:
+                                <div style="height:20px;width:20px" class="rounded me-2 bg-success"></div>
+                                break;
+                            case Enums.NotificationType.Info:
+                                <div style="height:20px;width:20px" class="rounded me-2 bg-info"></div>
+                                break;
+                        }
+                        <strong class="me-auto">
+                            @Notification.Title
+                        </strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        @Notification.Message
+                    </div>
+                </div>
+                Delay += 1500;
+            }
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var NotificationArray = document.getElementsByName('Notification');
+            NotificationArray.forEach(function (item, index) {
+                const toast = new bootstrap.Toast(item);
+                toast.show();
+            });
+        });
+    </script>
+}
+
+

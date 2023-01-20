@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1 class="text-light mb-3">Log In</h1>
+        @await Html.PartialAsync("~/Views/Account/Partials/_LoginForm.cshtml")
+    </div>
+</div>

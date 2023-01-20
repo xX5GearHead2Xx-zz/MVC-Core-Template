@@ -1,0 +1,42 @@
+﻿<h1 class="text-light">Legal</h1>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.TextType == Enums.LegalTextType.TermsAndConditions ? "active" : "")" aria-current="true" href="@Url.Action("Legal","Home", new {TextType = Ecommerce.Enums.LegalTextType.TermsAndConditions})">Terms and Conditions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.TextType == Enums.LegalTextType.Disclaimer ? "active" : "")" aria-current="true" href="@Url.Action("Legal","Home", new {TextType = Ecommerce.Enums.LegalTextType.Disclaimer})">Disclaimer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.TextType == Enums.LegalTextType.PrivacyPolicy ? "active" : "")" aria-current="true" href="@Url.Action("Legal","Home", new {TextType = Ecommerce.Enums.LegalTextType.PrivacyPolicy})">Privacy Policy</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.TextType == Enums.LegalTextType.ReturnsPolicy ? "active" : "")" aria-current="true" href="@Url.Action("Legal","Home", new {TextType = Ecommerce.Enums.LegalTextType.ReturnsPolicy})">Returns Policy</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewBag.TextType == Enums.LegalTextType.CookiePolicy ? "active" : "")" aria-current="true" href="@Url.Action("Legal","Home", new {TextType = Ecommerce.Enums.LegalTextType.CookiePolicy})">Cookie Policy</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        @switch (ViewBag.TextType)
+        {
+            case Enums.LegalTextType.TermsAndConditions:
+                @await Html.PartialAsync("~/Views/Legal/Partials/_TermsAndConditions.cshtml")
+                break;
+            case Enums.LegalTextType.Disclaimer:
+                @await Html.PartialAsync("~/Views/Legal/Partials/_Disclaimer.cshtml")
+                break;
+            case Enums.LegalTextType.PrivacyPolicy:
+                @await Html.PartialAsync("~/Views/Legal/Partials/_PrivacyPolicy.cshtml")
+                break;
+            case Enums.LegalTextType.ReturnsPolicy:
+                @await Html.PartialAsync("~/Views/Legal/Partials/_ReturnsPolicy.cshtml")
+                break;
+            case Enums.LegalTextType.CookiePolicy:
+                @await Html.PartialAsync("~/Views/Legal/Partials/_CookiePolicy.cshtml")
+                break;
+        }
+    </div>
+</div>
